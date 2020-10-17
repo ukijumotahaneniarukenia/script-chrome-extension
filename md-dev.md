@@ -204,3 +204,18 @@ distディレクトリをchrome-extensionにマウントしておしまい
 ```
 
 ```
+
+
+
+２回目以降
+
+```
+$ git clone https://github.com/ukijumotahaneniarukenia/script-chrome-extension.git
+
+$ cd my-extension-xpath-util/
+
+$ npm ci
+
+$ npm run build
+
+```
