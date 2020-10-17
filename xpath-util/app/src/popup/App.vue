@@ -1,19 +1,26 @@
 <template>
-  <hello-world />
+  <v-app>
+    <HelloWorld />
+    <DisplayTableView />
+  </v-app>
 </template>
 
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
+import DisplayTableView from '@/components/DisplayTableView.vue'
 
 export default {
   name: 'App',
-  components: { HelloWorld }
+  components: {
+    HelloWorld,
+    DisplayTableView
+  }
 }
 </script>
 
 <style>
 html {
-  width: 400px;
-  height: 400px;
+  height: 900px;
+  width: 1200px;
 }
 </style>
