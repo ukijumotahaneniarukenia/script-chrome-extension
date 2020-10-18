@@ -1,17 +1,17 @@
-export default async function listUpStaticMethods(instance) {
+export default async function listUpStaticMethods(instanceName) {
   let resultList = new Set();
   let staticMethodsNameList;
 
-  if (typeof instance === "object") {
+  if (typeof instanceName === "object") {
     // デフォルトはオブジェクトで取りに行く
-    staticMethodsNameList = Object.getOwnPropertyNames(instance);
+    staticMethodsNameList = Object.getOwnPropertyNames(instanceName);
 
     if (staticMethodsNameList.length === 0) {
       // デフォで取れない場合はファンクション型で取りに行く
-      staticMethodsNameList = Object.getOwnPropertyNames(instance.constructor);
+      staticMethodsNameList = Object.getOwnPropertyNames(instanceName.constructor);
     }
-  } else if (typeof instance === "function") {
-    staticMethodsNameList = Object.getOwnPropertyNames(instance.prototype);
+  } else if (typeof instanceName === "function") {
+    staticMethodsNameList = Object.getOwnPropertyNames(instanceName.prototype);
   } else {
     return;
   }
