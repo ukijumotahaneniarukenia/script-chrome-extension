@@ -9,7 +9,7 @@ export default async function listUpAllXpath(targetUrl) {
 
   xpathList.push(xpath);
 
-  await listUpAllXpath(targetElement, xpath, prevXpath, xpathList);
+  await listUpAllXpath(targetDocument, targetElement, xpath, prevXpath, xpathList);
 
   return xpathList;
 
@@ -30,7 +30,7 @@ export default async function listUpAllXpath(targetUrl) {
     }
   }
 
-  async function listUpAllXpath(targetElement, xpath, prevXpath, xpathList) {
+  async function listUpAllXpath(targetDocument, targetElement, xpath, prevXpath, xpathList) {
     if (targetElement.nodeName.toLocaleLowerCase() === "html") {
       // 初回の場合
 
@@ -50,6 +50,7 @@ export default async function listUpAllXpath(targetUrl) {
 
         // パラレル展開(headとbodyの2つへの分岐展開)
         listUpAllXpath(
+          targetDocument,
           firstSameHierarchyList[firstSameIdx],
           xpath,
           xpath,
@@ -60,7 +61,7 @@ export default async function listUpAllXpath(targetUrl) {
       // 2回目以降の場合
 
       // タグ名が同一か問わず、同一階層に存在しているすべての子ノードリストを取得
-      let iterator = document.evaluate(
+      let iterator = targetDocument.evaluate(
         xpath,
         document,
         null,
@@ -87,7 +88,7 @@ export default async function listUpAllXpath(targetUrl) {
           ].nodeName.toLocaleLowerCase();
 
           // 同一タグ名に対して連番を付与するために取得
-          let same_tag_hierarchy_children_list = document.evaluate(
+          let same_tag_hierarchy_children_list = targetDocument.evaluate(
             prevXpath + "/" + childElement,
             document,
             null,
@@ -108,6 +109,7 @@ export default async function listUpAllXpath(targetUrl) {
             xpathList.push(xpath);
 
             listUpAllXpath(
+              targetDocument,
               same_hierarchy_children_list[hieIdx],
               xpath,
               xpath,
@@ -140,7 +142,7 @@ export default async function listUpAllXpath(targetUrl) {
 
               xpathList.push(xpath);
 
-              listUpAllXpath(currentElement, xpath, xpath, xpathList);
+              listUpAllXpath(targetDocument, currentElement, xpath, xpath, xpathList);
             }
           }
         }

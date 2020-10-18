@@ -12,14 +12,14 @@
       </v-btn>
     </v-layout>
     <v-layout>
-      <div>{{ targetUrl }}</div>
+      <div>targetUrl {{ targetUrl }}</div>
+    </v-layout>
+    <v-layout>
+      <div>receive {{ receiveUrl }}</div>
     </v-layout>
     <v-layout>
       <div>{{ displayXpathListSize }}</div>
     </v-layout>
-    <!-- <v-layout>
-      <div>{{ displayXpathList }}</div>
-    </v-layout> -->
     <v-card>
       <v-card-title>
         <v-text-field
@@ -48,6 +48,7 @@ export default {
     return {
       searchKeyWord: "",
       targetUrl: "",
+      receiveUrl: "",
       displayXpathList: [],
       displayXpathListSize: 0,
       displayHeaderList: [{ text: "Xpath", value: "xpath" }],
@@ -58,8 +59,9 @@ export default {
       // https://qiita.com/shanonim/items/7718556c0fab54a517c2
       // https://stackoverflow.com/questions/32547735/javascript-promises-how-to-access-variable-this-inside-a-then-scope
       let self = this
-      listUpAllXpath(this.targetUrl).then(function(xpathList){
-        // self.displayXpathList = xpathList
+      self.displayXpathList = []
+      self.receiveUrl = self.targetUrl
+      listUpAllXpath(self.targetUrl).then(function(xpathList){
         self.displayXpathListSize = xpathList.length
         for (let xpathIdx = 0; xpathIdx < xpathList.length; xpathIdx++) {
           let xpathData = xpathList[xpathIdx];
