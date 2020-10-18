@@ -1,4 +1,4 @@
-function NNN(targetElement, xpath, prevXpath, xpathList) {
+function listUpAllXpath(targetElement, xpath, prevXpath, xpathList) {
 
   if (targetElement.nodeName.toLocaleLowerCase() === 'html') {
     // 初回の場合
@@ -12,7 +12,7 @@ function NNN(targetElement, xpath, prevXpath, xpathList) {
       xpathList.push(xpath)
 
       // パラレル展開(headとbodyの2つへの分岐展開)
-      NNN(firstSameHierarchyList[firstSameIdx], xpath, xpath, xpathList)
+      listUpAllXpath(firstSameHierarchyList[firstSameIdx], xpath, xpath, xpathList)
     }
   } else {
     // 2回目以降の場合
@@ -47,7 +47,7 @@ function NNN(targetElement, xpath, prevXpath, xpathList) {
 
           xpathList.push(xpath)
 
-          NNN(same_hierarchy_children_list[hieIdx], xpath, xpath, xpathList)
+          listUpAllXpath(same_hierarchy_children_list[hieIdx], xpath, xpath, xpathList)
 
         } else {
           // 複数の場合
@@ -65,7 +65,7 @@ function NNN(targetElement, xpath, prevXpath, xpathList) {
 
             xpathList.push(xpath)
 
-            NNN(currentElement, xpath, xpath, xpathList)
+            listUpAllXpath(currentElement, xpath, xpath, xpathList)
           }
         }
       }
@@ -79,7 +79,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   let xpath = '/' + targetElement.nodeName.toLocaleLowerCase()
   let prevXpath = '/' + targetElement.nodeName.toLocaleLowerCase()
   xpathList.push(xpath)
-  NNN(targetElement, xpath, prevXpath, xpathList)
+  listUpAllXpath(targetElement, xpath, prevXpath, xpathList)
 
   if (request.message == "DomJsonizeDownload") {
     // DomをJSON化します
