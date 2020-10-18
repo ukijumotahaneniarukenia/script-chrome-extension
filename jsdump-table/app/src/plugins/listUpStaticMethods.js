@@ -1,20 +1,17 @@
-export default async function listUpStaticMethods(instanceName) {
+function getClass(className) {
+  // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/eval#Don't_use_eval_needlessly!
+  return Function("return (" + className + ")")();
+}
+
+export default async function listUpStaticMethods(className) {
+  // listUpStaticMethods("Date")
+  // listUpStaticMethods("Array")
+  // listUpStaticMethods("String")
+  // listUpStaticMethods("Window")
+  // listUpStaticMethods("Math")
   let resultList = new Set();
-  let staticMethodsNameList;
-
-  if (typeof instanceName === "object") {
-    // デフォルトはオブジェクトで取りに行く
-    staticMethodsNameList = Object.getOwnPropertyNames(instanceName);
-
-    if (staticMethodsNameList.length === 0) {
-      // デフォで取れない場合はファンクション型で取りに行く
-      staticMethodsNameList = Object.getOwnPropertyNames(instanceName.constructor);
-    }
-  } else if (typeof instanceName === "function") {
-    staticMethodsNameList = Object.getOwnPropertyNames(instanceName.prototype);
-  } else {
-    return;
-  }
+  let targetClass = getClass(className);
+  let staticMethodsNameList = Object.getOwnPropertyNames(targetClass);
 
   for (let idx = 0; idx < staticMethodsNameList.length; idx++) {
     resultList.add(staticMethodsNameList[idx]);

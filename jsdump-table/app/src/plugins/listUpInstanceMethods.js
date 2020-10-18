@@ -4,13 +4,22 @@ function getClass(className) {
 }
 
 export default async function listUpInstanceMethods(className) {
+  // listUpInstanceMethods("Date")
+  // listUpInstanceMethods("Array")
+  // listUpInstanceMethods("String")
+  // listUpInstanceMethods("Window")
+  // listUpInstanceMethods("Math")
   let resultList = new Set();
   let targetClass = getClass(className)
   let targetInstance
   try {
     targetInstance = new targetClass()
   } catch (error) {
-    targetInstance = Object.create(targetClass.prototype)
+    try {
+      targetInstance = Object.create(targetClass.prototype)
+    } catch (error) {
+      targetInstance = Object.create(targetClass)
+    }
   }
   // グローバルなオブジェクトも受け取れるようにインスタンスからプロトタイプを逆引き
   let instanceMethodsNameList = Object.getOwnPropertyNames(Object.getPrototypeOf(targetInstance))
