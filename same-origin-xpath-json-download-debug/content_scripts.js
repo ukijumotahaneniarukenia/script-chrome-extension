@@ -89,7 +89,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       let targetXpath = xpathList[xpathIdx];
       let iterator = document.evaluate(targetXpath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
       let targetElement = iterator.snapshotItem(0)
-      hash = {targetXpath : targetXpath, targetElement: targetElement.outerHTML}
+      hash = {targetUrl: window.location.href, targetXpath: targetXpath, targetElement: targetElement.outerHTML}
       domJsonizeHashList.push(hash)
     }
     // 呼び出し元に処理結果をレスポンスする
