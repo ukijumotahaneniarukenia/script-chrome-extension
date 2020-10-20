@@ -25,5 +25,6 @@
     "default_icon": "icon_32.png",
     "default_title": "vuetify-template",
     "default_popup": "display.html"
-  }
+  },
+  "content_security_policy": "script-src 'sha256-Dr1+ueaF5DuRHeBDta0+77aiL2XPJdk7SdwuX+R/xIE=' 'unsafe-eval' 'self' https://cdn.jsdelivr.net; object-src 'self'"
 }
