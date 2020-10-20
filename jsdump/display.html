@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+  <meta charset="UTF-8" />
+  <title>Vuetify Template</title>
+  <style>
+    body {
+      height: 300px;
+      width: 800px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-layout justify-center justify-space-around>
+        <v-text-field label="Please target instance name" v-model="targetInstanceName"></v-text-field>
+      </v-layout>
+      <v-layout>
+        <v-btn class="ma-2" color="secondary" @click="fetchInstanceMethods">
+          FETCH INSTANCE METHODS
+        </v-btn>
+      </v-layout>
+      <v-layout>
+        <div>targetInstanceName {{ targetInstanceName }}</div>
+      </v-layout>
+      <v-card>
+        <v-card-title>
+          <v-text-field v-model="searchKeyWord" append-icon="mdi-magnify" label="Search" single-line hide-details>
+          </v-text-field>
+        </v-card-title>
+        <v-data-table :headers="displayHeaderList" :items="displayMetaInfoList" :search="searchKeyWord"></v-data-table>
+      </v-card>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script type="module">
+    import {listUpInstanceMethods} from "../plugins/listUpInstanceMethods.js";
+    import {listUpStaticMethods} from "../plugins/listUpStaticMethods.js";
+    new Vue({
+      el: "#app",
+      vuetify: new Vuetify(),
+      data: function () {
+        return {
+          searchKeyWord: "",
+          targetInstanceName: "",
+          displayMetaInfoList: [],
+          displayHeaderList: [{ text: "Method", value: "method" }],
+        };
+      },
+      methods: {
+        fetchInstanceMethods() {
+          // https://qiita.com/shanonim/items/7718556c0fab54a517c2
+          // https://stackoverflow.com/questions/32547735/javascript-promises-how-to-access-variable-this-inside-a-then-scope
+          let self = this;
+          self.displayMetaInfoList = [];
+          listUpInstanceMethods(self.targetInstanceName).then(function (
+            resultList
+          ) {
+            for (let idx = 0; idx < resultList.length; idx++) {
+              let resultData = resultList[idx];
+              let resultEntry = { method: resultData };
+              self.displayMetaInfoList.push(resultEntry);
+            }
+          });
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>
