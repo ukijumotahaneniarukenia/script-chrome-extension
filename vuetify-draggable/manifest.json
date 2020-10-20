@@ -15,5 +15,5 @@
     "default_title": "vuetify-draggable",
     "default_popup": "display.html"
   },
-  "content_security_policy": "script-src 'sha256-krOyifQTGasiZTLwo9/OHpGPSXmymKOicCWZ6ATa6FM=' 'unsafe-eval' 'self' https://cdn.jsdelivr.net; object-src 'self'"
+  "content_security_policy": "script-src 'sha256-YmAHx5rraB181Af4Bp2K3oiDGLrh8oTtIm9KkQV0Rcs=' 'unsafe-eval' 'self' https://cdn.jsdelivr.net; object-src 'self'"
 }
