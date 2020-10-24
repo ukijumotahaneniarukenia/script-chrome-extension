@@ -2,8 +2,8 @@
   "manifest_version": 2,
   "author": "ukijumotahaneniarukenia",
   "homepage_url": "https://ukijumotahaneniarukenia.site/",
-  "name": "jsdump",
-  "description": "Download all XPATHs of the currently referenced web page and the DOM associated with them as a JSON file.",
+  "name": "injectJavascript",
+  "description": "injectJavascript",
   "version": "1.1",
   "icons": {
     "32": "icon_32.png",
@@ -17,14 +17,22 @@
         "https://*/*"
       ],
       "js": [
-        "eventHandler.js"
+        "content_scripts.js"
       ]
     }
   ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
   "browser_action": {
     "default_icon": "icon_32.png",
-    "default_title": "jsdump",
-    "default_popup": "display.html"
+    "default_title": "injectJavascript"
   },
-  "content_security_policy": "script-src 'sha256-go0vSJHJDZzPbQF9q19HqpjKFwTcOVDeAysS4ZBbf20=' 'unsafe-eval' 'self' https://cdn.jsdelivr.net; object-src 'self'"
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ]
 }

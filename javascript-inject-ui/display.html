@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+  <meta charset="UTF-8" />
+  <title>Vuetify Xpath Search</title>
+  <style>
+    body {
+      height: 300px;
+      width: 800px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-card>
+        <v-card-title>
+          <v-text-field v-model="searchKeyWord" append-icon="mdi-magnify" label="Search" single-line hide-details>
+          </v-text-field>
+        </v-card-title>
+        <v-data-table :headers="displayHeaderList" :items="displayMetaInfoList" :search="searchKeyWord"></v-data-table>
+      </v-card>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script type="module">
+    import { getAllXpath } from "../plugins/getAllXpath.js";
+    new Vue({
+      el: "#app",
+      vuetify: new Vuetify(),
+      data: function () {
+        return {
+          searchKeyWord: "",
+          targetInstanceName: "",
+          displayMetaInfoList: getAllXpath(),
+          displayHeaderList: [
+            { text: "Url", value: "targetUrl" },
+            { text: "Xpath", value: "targetXpath" },
+            { text: "Element", value: "targetElement" },
+          ],
+        };
+      }
+    });
+  </script>
+</body>
+
+</html>
