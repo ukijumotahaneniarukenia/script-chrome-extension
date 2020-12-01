@@ -1,5 +1,6 @@
 chrome.browserAction.onClicked.addListener(function (tab) {
   // 拡張機能アイコンクリック時に起動
+  // https://developer.chrome.com/extensions/windows#method-getAll
   chrome.windows.getAll((windowInfoList)=>{
     windowInfoList.map((windowInfo)=>{
       let resultList = []
