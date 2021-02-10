@@ -1,7 +1,7 @@
 const ENTRY = {
   triggerDomId: "#wikipedia",
   siteUrl: "https://en.wikipedia.org/wiki/Main_Page",
-  executeScriptPath: "./parseWikipedia.js",
+  executeScriptPath: "./scrapeWikipedia.js",
 };
 
 async function openNewTab(url, timeoutSeconds = 5) {
@@ -28,7 +28,7 @@ async function openNewTab(url, timeoutSeconds = 5) {
   });
 }
 
-async function parseWikipedia(tabId, executeScriptPath) {
+async function scrapeWikipedia(tabId, executeScriptPath) {
   return new Promise((resolve, reject) => {
     chrome.tabs.executeScript(
       tabId,
@@ -67,7 +67,7 @@ document
     event.preventDefault();
     try {
       const openTabId = await openNewTab(ENTRY.siteUrl);
-      const resultText = await parseWikipedia(
+      const resultText = await scrapeWikipedia(
         openTabId,
         ENTRY.executeScriptPath
       );
