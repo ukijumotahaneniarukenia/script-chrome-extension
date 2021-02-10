@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "author": "ukijumotahaneniarukenia",
+  "homepage_url": "https://ukijumotahaneniarukenia.site/",
+  "name": "sample-storage",
+  "description": "sample-storage",
+  "version": "1.0",
+  "icons": {
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background":{
+    "scripts":[
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": ["tabs", "history", "storage"],
+  "browser_action": {
+    "default_icon": "icon_32.png",
+    "default_title": "sample-storage",
+    "default_popup": "display.html"
+  }
+}

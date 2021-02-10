@@ -32,3 +32,13 @@ permissionをリラックスさせて使えるかどうか1つずつチェック
 
 - API一覧
   - https://developer.chrome.com/docs/extensions/reference/
+
+
+データの保持
+
+window.localstorageだとURL変わるからだめ
+
+例
+```
+"chrome-extension://ejghhplbeieodiehlgdecchilbkkhcfm/display.html"
+```
