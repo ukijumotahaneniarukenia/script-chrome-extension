@@ -24,7 +24,7 @@ After installing the extension, click the icon to run it.
 
 ユーザーが参照しているWEBページに対して拡張機能を実行するため。
 
-- リモートコード を使用していますか？
+- リモートコードを使用していますか？
 
 いいえ
 
